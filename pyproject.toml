@@ -1,0 +1,40 @@
+[project]
+name = "vectorizer-service"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "grpcio>=1.85.1",
+    "numpy>=1.26.0,<3.0.0",
+    "protobuf>=7.35.1",
+    "pydantic>=2.14.2",
+    "pydantic-settings>=2.16.2",
+    "sentencepiece>=0.2.0",
+    "torch>=2.3.0",
+    "transformers>=4.40.0",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "vectorizer_service"
+module-root = "src"
+
+[dependency-groups]
+dev = [
+    "grpcio-tools>=1.85.1",
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [ { index = "pytorch-cpu", marker = "sys_platform == 'linux'" } ]
